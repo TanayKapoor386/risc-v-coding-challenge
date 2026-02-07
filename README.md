@@ -31,3 +31,11 @@ From the project root directory on macOS:
 
 ```bash
 docker run --rm -it -v "$PWD":/work -w /work ubuntu:24.04 bash
+apt-get update
+apt-get install -y gcc-riscv64-linux-gnu qemu-user
+
+riscv64-linux-gnu-gcc -O2 -march=rv64gcv -mabi=lp64d -static src/q15_axpy_challenge.c -o q15_axpy
+qemu-riscv64 ./q15_axpy
+
+Installs the RISC-V Linux cross-compiler (riscv64-linux-gnu-gcc) used to build RV64 + RVV binaries on x86/ARM hosts.
+Installs QEMU user-mode emulation (qemu-riscv64) to run RISC-V Linux executables without a full virtual machine.
