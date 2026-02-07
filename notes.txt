@@ -2,3 +2,33 @@ root@837ccd063b67:/work# qemu-riscv64 ./q15_axpy
 Cycles ref: 120709
 Verify RVV: OK (max diff = 0)
 Cycles RVV: 65958
+
+
+--- Optimized --- 
+
+root@4cdabef4fbfa:/work# qemu-riscv64 ./q15_axpy 
+Cycles ref: 177041 
+Verify RVV: OK (max diff = 0) 
+Cycles RVV: 70625
+
+(gdb) disas q15_axpy_rvv
+Dump of assembler code for function q15_axpy_rvv:
+   0x0000000000010764 <+0>:     mla     z3.d, p4/m, z11.d, z16.d
+   0x0000000000010768 <+4>:     .inst   0x63210686 ; undefined
+   0x000000000001076c <+8>:     .inst   0x00d508b3 ; undefined
+   0x0000000000010770 <+12>:    .inst   0xfff30e13 ; undefined
+   0x0000000000010774 <+16>:    bl      0xfffffffffe0f02f8
+   0x0000000000010778 <+20>:    ldr     w5, 0x16778 <mallinfo2+292>
+   0x000000000001077c <+24>:    .inst   0x86f20005 ; undefined
+   0x0000000000010780 <+28>:    .inst   0x02e787bb ; undefined
+   0x0000000000010784 <+32>:    .inst   0x010787bb ; undefined
+   0x0000000000010788 <+36>:    .inst   0x0067d863 ; undefined
+   0x000000000001078c <+40>:    .inst   0x01d7ce63 ; undefined
+   0x0000000000010790 <+44>:    .inst   0x0107969b ; undefined
+   0x0000000000010794 <+48>:    .inst   0x4106d69b ; undefined
+   0x0000000000010798 <+52>:    .inst   0x00d61023 ; undefined
+   0x000000000001079c <+56>:    .inst   0x05890509 ; undefined
+   0x00000000000107a0 <+60>:    .inst   0x1ae30609 ; undefined
+   0x00000000000107a4 <+64>:    .inst   0x8082fd15 ; undefined
+   0x00000000000107a8 <+68>:    tbnz    x1, #63, 0xb684
+End of assembler dump.
