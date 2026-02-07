@@ -1,0 +1,4 @@
+root@837ccd063b67:/work# qemu-riscv64 ./q15_axpy 
+Cycles ref: 120709
+Verify RVV: OK (max diff = 0)
+Cycles RVV: 65958
